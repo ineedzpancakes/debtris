@@ -8,7 +8,7 @@
 ## How to Play
 
 1. **Control the Tetrominoes:**
-   - **Move Left/Right:** Use the **arrow keys** to slide the piece.
+   - **Move Left/Right/Down:** Use the **arrow keys** to slide the piece.
    - **Hard Drop:** Press the **space bar** to instantly drop a tetromino.
    - **Rotate:** Use the **Z** and **X** keys to rotate. Each rotation deducts from your cash balance!
    - **Pause:**  Use the P or Esc keys to pause your game.
