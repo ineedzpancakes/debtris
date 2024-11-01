@@ -8,10 +8,9 @@
 ## How to Play
 
 1. **Control the Tetrominoes:**
-   - **Move Left/Right/Down:** Use the **arrow keys** to slide the piece.
+   - **Move Left/Right:** Use the **arrow keys** to slide the piece.
    - **Hard Drop:** Press the **space bar** to instantly drop a tetromino.
    - **Rotate:** Use the **Z** and **X** keys to rotate. Each rotation deducts from your cash balance!
-   - **Pause:**  Use the P or Esc keys to pause your game.
 
 2. **Manage Your Cash:**
    - You start with a set amount of cash that is used to rotate tetrominoes.
@@ -27,24 +26,6 @@
 - **HUD (Heads-Up Display):** Track your score, level, lines cleared, remaining cash, and countdown to your next “paycheck.”
 - **Mobile Support:** Now playable on mobile devices! Tap and swipe to control your tetrominoes—play anytime, anywhere.
 
-## Changes from v1
-- New and improved look
-- Completely rewritten (kind of)
-- Optimized ghost piece preview
-- Added next piece preview
-- Separated core Tetris and Debtris scoring systems
-- Implemented countdown timer that resets every 15 seconds to reward paycheck
-- Rotating tetrominoes now costs 25 cash
-- Functional on mobile! (I hope)
-
-## To-do
-- Implement controls legend
-- Gameplay balances
-- Flash in red when in debt
-- New logo design
-- 8-bit font
-- sfx
-
 ## Installation
 
 1. Clone the repository:
@@ -57,10 +38,9 @@
 
 | Action            | Key(s)         |
 |-------------------|----------------|
-| Move Left/Right/Down   | Left/Right/Down Arrow |
+| Move Left/Right   | Left/Right Arrow |
 | Hard Drop         | Space Bar      |
 | Rotate            | Z (Counterclockwise), X (Clockwise) |
-| Pause             | P, Esc         |
 
 > **Note:** Controls are optimized for desktop and mobile play, with intuitive touch options on mobile devices.
 

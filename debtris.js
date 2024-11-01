@@ -497,7 +497,7 @@ class Debtris {
   }
   
   // set the border and fill colors for a tetromino
-  setPieceColor(tetromino, color) {
+  setTetrominoColor(tetromino, color) {
     switch (tetromino) {
       case Debtris.Z_TETROMINO: this.zColor = [ ...color ]; break;
       case Debtris.S_TETROMINO: this.sColor = [ ...color ]; break;
@@ -595,7 +595,7 @@ class Debtris {
     this._dispatch(Debtris.NEXT_TETROMINO, {
       type: Debtris.NEXT_TETROMINO,
       tetromino: this.tetromino.name,
-      nextPiece: this.next.name
+      nextTetromino: this.next.name
     });
     
     // game loop
@@ -645,7 +645,7 @@ class Debtris {
     
     // select random tetrominoes
     this.tetromino = this.tetrominoes[(Math.random() * this.tetrominoes.length) | 0];
-    this.next = this.tetrominoes[this._nextPieceId()];
+    this.next = this.tetrominoes[this._nextTetrominoId()];
     
     // initial tetromino's position and rotation
     this.tetrominoPosition = this.tetromino.iniPos.slice(0);
@@ -801,7 +801,7 @@ class Debtris {
     const column = ((x - this.boardX) / this.squareSide) | 0;
     
     // get tetromino's bounds, calculate center column and row center 
-    const { top, bottom, left, right } = this._getPieceBounds();
+    const { top, bottom, left, right } = this._getTetrominoBounds();
     const middleRow = ((top + bottom) / 2) | 0;
     const middleColumn = ((left + right) / 2) | 0;
     
@@ -907,7 +907,7 @@ class Debtris {
   }
   
   // get current tetromino's left and right bounds
-  _getPieceBounds() {
+  _getTetrominoBounds() {
     const p = this.tetromino.rot[this.tetrominoRotation];
     let top = this.boardHeight;
     let bottom = 0;
@@ -970,7 +970,7 @@ class Debtris {
     
     
     // do move if buffered
-    if (this.moveLeft && this._canMovePiece(-1, 0)) {
+    if (this.moveLeft && this._canMoveTetromino(-1, 0)) {
       const oldPosition = [ ...this.tetrominoPosition ];
       --this.tetrominoPosition[0];
       
@@ -991,7 +991,7 @@ class Debtris {
       
     }
 
-    if (this.moveRight && this._canMovePiece(1, 0)) {
+    if (this.moveRight && this._canMoveTetromino(1, 0)) {
       const oldPosition = [ ...this.tetrominoPosition ];
       ++this.tetrominoPosition[0];
       
@@ -1064,7 +1064,7 @@ class Debtris {
       // hard drop = push tetromino as far down as possible
       // score increase is 2x the numer of dropped lines
       const oldPosition = [ ...this.tetrominoPosition ];
-      while (this._canMovePiece(0, 1)) {
+      while (this._canMoveTetromino(0, 1)) {
         ++this.tetrominoPosition[1];
         this.pressDownScore += 2;
       }
@@ -1079,10 +1079,10 @@ class Debtris {
       });
       
       // do tetromino lock
-      this._lockPiece();
+      this._lockTetromino();
       
     } else if (this.moveDown || this.framesTilDrop === 0) {
-      if (this._canMovePiece(0, 1)) {
+      if (this._canMoveTetromino(0, 1)) {
         
         if (this.moveDown) {
           // soft drop makes 1 point per dropped line
@@ -1106,14 +1106,14 @@ class Debtris {
         
       } else {
         // lock tetromino if it couldn't move down
-        this._lockPiece();
+        this._lockTetromino();
       }
     }
   }
   
-  _lockPiece() {
+  _lockTetromino() {
     this.framesTilDrop = -1;
-    this._setPiece();
+    this._setTetromino();
     
     // fire tetromino lock event
     this._dispatch(Debtris.TETROMINO_LOCK, {
@@ -1266,10 +1266,10 @@ class Debtris {
       this.tetromino = this.next;
       this.tetrominoPosition = this.tetromino.iniPos.slice(0);
       this.tetrominoRotation = 0;
-      this.next = this.tetrominoes[this._nextPieceId()];
+      this.next = this.tetrominoes[this._nextTetrominoId()];
       
       // try to place current tetromino
-      if (this._canMovePiece(0, 0)) {
+      if (this._canMoveTetromino(0, 0)) {
         this.framesTilDrop = this._getFramesPerGridcell(this.level);
         this.gameState = Debtris.STATE_DROP;
         
@@ -1277,12 +1277,12 @@ class Debtris {
         this._dispatch(Debtris.NEXT_TETROMINO, {
           type: Debtris.NEXT_TETROMINO,
           tetromino: this.tetromino.name,
-          nextPiece: this.next.name
+          nextTetromino: this.next.name
         });
         
       } else {
         // can't place tetromino -it's game over
-        this._setPiece();
+        this._setTetromino();
         this._triggerGameOver();
       }
     }
@@ -1400,7 +1400,7 @@ class Debtris {
     this.doUndoPause = false;
   }
   
-  _nextPieceId() {
+  _nextTetrominoId() {
     let nextId = (Math.random() * 8) | 0;
     if (nextId === 7 || nextId === this.tetromino.id) {
       nextId = (Math.random() * 8) | 0;
@@ -1425,7 +1425,7 @@ class Debtris {
         return 300 * (lvl + 1);
     }
     else {
-        cash += 500;
+        this.cash += 500;
         return 1200 * (lvl + 1);    // tetris!
     }
   }
@@ -1474,7 +1474,7 @@ class Debtris {
   }
   
   // set tetromino down on board (lock it)
-  _setPiece() {
+  _setTetromino() {
     const p = this.tetromino.rot[this.tetrominoRotation];
     for (let i = 0; i < p.length; ++i) {
       for (let j = 0; j < p[i].length; ++j) {
@@ -1486,7 +1486,7 @@ class Debtris {
   }
   
   // can the tetromino move
-  _canMovePiece(offsetX, offsetY) {
+  _canMoveTetromino(offsetX, offsetY) {
     return this._canMove(this.tetromino, this.tetrominoRotation, this.tetrominoPosition, offsetX, offsetY);
   }
   
@@ -1529,7 +1529,7 @@ class Debtris {
     this._drawBackground();
     this._drawBoard();
     this._drawGhost();
-    this._drawPiece();
+    this._drawTetromino();
     this._drawHUD();
     this._drawNext();
   }
@@ -1617,7 +1617,7 @@ class Debtris {
   }
   
   // draw current tetromino
-  _drawPiece() {
+  _drawTetromino() {
     if (this.gameState === Debtris.STATE_DROP) {
       // current tetromino is only drawn in drop state
       const p = this.tetromino.rot[this.tetrominoRotation];
@@ -1755,23 +1755,3 @@ class Debtris {
     }
   }
 }
-
-/** changes
- * - completely rewritten (kinda)
- * - optimized ghost piece preview
- * - added next piece preview
- * - separated core tetris and debris scoring
- * - timer counts down every 15 seconds for paycheck
- * - rotating pieces now cost 25 cash
- * functional on mobile! (i hope.)
- */
-
-/**
- * to-do
- * - implement new controls list
- * - gameplay balances
- * - flash when in debt
- * - new graphics/visuals
- * - code cleanup
- * - sfx
- */
