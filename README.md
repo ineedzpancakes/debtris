@@ -26,6 +26,23 @@
 - **HUD (Heads-Up Display):** Track your score, level, lines cleared, remaining cash, and countdown to your next “paycheck.”
 - **Mobile Support:** Now playable on mobile devices! Tap and swipe to control your tetrominoes—play anytime, anywhere.
 
+## Changes from v1
+- New and improved look
+- Completely rewritten (kind of)
+- Optimized ghost piece preview
+- Added next piece preview
+- Separated core Tetris and Debtris scoring systems
+- Implemented countdown timer that resets every 15 seconds to reward paycheck
+- Rotating tetrominoes now costs 25 cash
+- Functional on mobile! (I hope)
+
+## To-do
+- Implement control legend
+- Gameplay Balances
+- Flash in red when in debt
+- New logo design
+- sfx
+
 ## Installation
 
 1. Clone the repository:
