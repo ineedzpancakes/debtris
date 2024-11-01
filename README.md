@@ -58,6 +58,7 @@
 | Move Left/Right/Down   | Left/Right/Down Arrow |
 | Hard Drop         | Space Bar      |
 | Rotate            | Z (Counterclockwise), X (Clockwise) |
+| Pause             | P, Esc         |
 
 > **Note:** Controls are optimized for desktop and mobile play, with intuitive touch options on mobile devices.
 
