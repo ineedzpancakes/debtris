@@ -37,7 +37,7 @@
 - Functional on mobile! (I hope)
 
 ## To-do
-- Implement control legend
+- Implement controls legend
 - Gameplay Balances
 - Flash in red when in debt
 - New logo design
@@ -55,7 +55,7 @@
 
 | Action            | Key(s)         |
 |-------------------|----------------|
-| Move Left/Right   | Left/Right Arrow |
+| Move Left/Right/Down   | Left/Right/Down Arrow |
 | Hard Drop         | Space Bar      |
 | Rotate            | Z (Counterclockwise), X (Clockwise) |
 
