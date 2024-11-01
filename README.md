@@ -39,9 +39,10 @@
 
 ## To-do
 - Implement controls legend
-- Gameplay Balances
+- Gameplay balances
 - Flash in red when in debt
 - New logo design
+- 8-bit font
 - sfx
 
 ## Installation
